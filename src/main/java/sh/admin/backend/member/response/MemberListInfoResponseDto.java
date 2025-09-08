@@ -18,4 +18,5 @@ public class MemberListInfoResponseDto {
     private String leagueName; // 선호 리그 명
     private Long teamId; // 선호 팀 ID
     private String teamName; // 선호 팀 명
+    private String createdAt; // 생성일자
 }

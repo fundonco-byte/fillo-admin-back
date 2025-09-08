@@ -28,7 +28,7 @@ public class MemberController {
     // 회원 리스트 조회
     @MethodCallMonitor
     @TimeMonitor
-    @GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.ALL_VALUE})
+    @PostMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.ALL_VALUE})
     public ResponseEntity<ResponseBody> getMemberList(
             HttpServletRequest request,
             @RequestBody MemberListRequestDto memberListRequestDto){
@@ -49,7 +49,7 @@ public class MemberController {
     @GetMapping(value = "/info", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.ALL_VALUE})
     public ResponseEntity<ResponseBody> getAccountDetailInfo(
             HttpServletRequest request,
-            @RequestParam Long m){
+            @RequestParam("m") Long m){
         log.info("[Member] 회원 정보 상세 조회");
 
         try{
@@ -85,7 +85,7 @@ public class MemberController {
     @DeleteMapping (value = "/delete", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.ALL_VALUE})
     public ResponseEntity<ResponseBody> deleteAccount(
             HttpServletRequest request,
-            @RequestParam Long m){
+            @RequestParam("m") Long m){
         log.info("[Member] 특정 회원 삭제");
 
         try{

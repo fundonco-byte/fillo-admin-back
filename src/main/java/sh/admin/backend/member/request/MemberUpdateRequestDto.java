@@ -1,11 +1,16 @@
 package sh.admin.backend.member.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import sh.admin.backend.common.base.AbstractVO;
 
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class MemberUpdateRequestDto {
+public class MemberUpdateRequestDto extends AbstractVO {
     private Long memberId; // 계정 ID
     private String nickName; // 닉네임
     private String address; // 주소

@@ -99,13 +99,14 @@ public class MemberService extends AbstractExceptionHandler {
                                     .nickName(eachMember.getNickName())
                                     .name(eachMember.getName())
                                     .accountType(eachMember.getAccountType().equals("default") ? "일반" : "카카오")
-                                    .live(eachMember.getLive().equals("y") ? "활성" : "비활성")
+                                    .live(eachMember.getLive())
                                     .profileImage(eachMember.getProfileImage())
                                     .gender(eachMember.getGender().equals("M") ? "남성" : "여성")
                                     .leagueId(eachMember.getLeagueId())
                                     .leagueName(eachMember.getLeagueName())
                                     .teamId(eachMember.getTeamId())
                                     .teamName(eachMember.getTeamName())
+                                    .createdAt(eachMember.getCreatedAt().toString())
                                     .build()
                     ).collect(Collectors.toList());
 
@@ -126,7 +127,7 @@ public class MemberService extends AbstractExceptionHandler {
             if (!jwtTokenProvider.validateToken(request.getHeader("Authorization").substring(7)) && !jwtTokenProvider.validateToken(request.getHeader("RefreshToken"))) {
                 log.info("옳바른 토큰 정보가 아니라 정보를 조회할 수 없습니다.");
                 LogUtil.logError("옳바른 토큰 정보가 아니라 정보를 조회할 수 없습니다.", request.getHeader("Authorization"));
-                return new ResponseBody(StatusCode.CANT_GET_MEMBER_INFO, null);
+                return new ResponseBody(StatusCode.UNSUPPORTED_TOKEN, null);
             }
 
             // 정보 조회할 회원 객체 호출
@@ -144,7 +145,7 @@ public class MemberService extends AbstractExceptionHandler {
                             .birthDate(getMember.getBirthDate())
                             .postalCode(getMember.getPostalCode())
                             .phone(getMember.getPhone())
-                            .live(getMember.getLive().equals("y") ? "활성" : "비활성")
+                            .live(getMember.getLive())
                             .profileImage(getMember.getProfileImage())
                             .gender(getMember.getGender().equals("M") ? "남성" : "여성")
                             .leagueId(getMember.getLeagueId())
@@ -171,7 +172,7 @@ public class MemberService extends AbstractExceptionHandler {
             if (!jwtTokenProvider.validateToken(request.getHeader("Authorization").substring(7)) && !jwtTokenProvider.validateToken(request.getHeader("RefreshToken"))) {
                 log.info("옳바른 토큰 정보가 아니라 정보를 수정할 수 없습니다.");
                 LogUtil.logError("옳바른 토큰 정보가 아니라 정보를 수정할 수 없습니다.", request.getHeader("Authorization"));
-                return new ResponseBody(StatusCode.CANT_GET_MEMBER_INFO, null);
+                return new ResponseBody(StatusCode.UNSUPPORTED_TOKEN, null);
             }
 
             // 수정할 회원 정보 호출
@@ -198,7 +199,7 @@ public class MemberService extends AbstractExceptionHandler {
             if (!jwtTokenProvider.validateToken(request.getHeader("Authorization").substring(7)) && !jwtTokenProvider.validateToken(request.getHeader("RefreshToken"))) {
                 log.info("옳바른 토큰 정보가 아니라 정보를 수정할 수 없습니다.");
                 LogUtil.logError("옳바른 토큰 정보가 아니라 정보를 수정할 수 없습니다.", request.getHeader("Authorization"));
-                return new ResponseBody(StatusCode.CANT_GET_MEMBER_INFO, null);
+                return new ResponseBody(StatusCode.UNSUPPORTED_TOKEN, null);
             }
 
             // 특정 회원 삭제
